@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious Bites Restaurant</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="home.css">
+    <style>
+        
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; 
+    color: #333; 
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+header nav ul {
+    list-style: none;
+}
+
+header nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+header h1{
+    font-family: "Sofia", sans-serif;
+    font-size: 45px;
+}
+
+.hero {
+    background-image: url('https://i.pinimg.com/564x/65/7d/0c/657d0c01845275877f84b22903a8a35b.jpg');
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+    padding: 100px 0;
+}
+
+.dish img {
+    display: block;
+    margin: 0 auto 20px; 
+    width: 200px; 
+    height: auto; 
+} 
+.dish-container{
+    display: flex;
+    align-items: center;
+    margin-left: 100px;
+}
+.hero h2 {
+    font-size: 3em;
+}
+
+.menu {
+    padding: 50px 0;
+}
+
+.menu h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.menu .dish {
+    text-align: center;
+}
+
+.menu .dish img {
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.reservation {
+    background-color: #f4f4f4;
+    padding: 50px 0;
+}
+
+.reservation h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.reservation form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.reservation input,
+.reservation textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.reservation button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+.icons {
+    position: absolute;
+    right: 30px;
+    top: 10%;
+    transform: translateY(-50%);
+    color: #fff;
+    text-decoration: none;
+}
+.icon {
+    position: absolute;
+    right: 20px;
+    top: 15%;
+    transform: translateY(-50%);
+    color: #fff;
+    text-decoration: none;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="font-effect-outline">Delicious Bites Restaurant</h1>
+            <nav>
+                <ul>
+                    <li><a href="http://localhost:8080/home">Home</a></li>
+                    <li><a href="http://localhost:8080/menu">Menu</a></li>
+                    <li><a href="http://localhost:8080/rev">Reservations</a></li>
+                    <li><a href="http://localhost:8080/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <a href="http://localhost:8080/login" class="icons"><i class="fa-solid fa-user"></i> Login</a>
+        <a href="http://localhost:8080/signup" class="icon"><i class="fa-solid fa-right-to-bracket"></i> Signup</a>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Welcome to Delicious Bites Restaurant</h2>
+            <p>Indulge in the finest culinary experience with our delicious dishes prepared by top chefs.</p>
+        </div>
+    </section>
+
+    <section class="menu">
+        <div class="container">
+            <h2>Special Dishes</h2>
+            <div class="dish-container">
+                <div class="dish">
+                    <img src="https://i.pinimg.com/564x/45/c0/54/45c0549a4c41ed67ff8c8984fbd560e4.jpg" alt="Kimchi Noodles">
+                    <h3>Kimchi Noodles</h3>
+                </div>
+                <div class="dish">
+                    <img src="https://i.pinimg.com/564x/43/f4/11/43f4118d294749ffda6aa5639d617e1b.jpg" alt="Butter Chicken">
+                    <h3>Butter Chicken</h3>
+                </div>
+                <div class="dish">
+                    <img src="https://i.pinimg.com/564x/8e/56/f1/8e56f1ccc13822899f2da8861c3ce86b.jpg" alt="Japanese Raman">
+                    <h3>Japanese Raman</h3>
+                </div>
+                <div class="dish">
+                    <img src="https://i.pinimg.com/564x/95/e7/2d/95e72d4f837a5ec1aa6b3fde6a99783b.jpg" alt="Prawn Biriyani">
+                    <h3>Prawn Biriyani</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reservation">
+        <div class="container">
+            <h2>Make a Reservation</h2>
+            <form id="reservation-form" action="/reserve" method="post">
+                <input type="text" name="name" placeholder="Name">
+                <div class="error" id="name-error"></div>
+                <input type="email" name="email" placeholder="Email">
+                <div class="error" id="email-error"></div>
+                <input type="datetime-local" name="date_time" placeholder="Date and Time">
+                <div class="error" id="datetime-error"></div>
+                <input type="number" name="person_count" placeholder="Number of Persons">
+                <div class="error" id="person-count-error"></div>
+                <textarea name="special_requests" placeholder="Special Requests"></textarea>
+                <button type="submit" class="btn">Make Reservation</button>
+            </form>
+            <div class="error" id="form-error"></div>
+            <div class="success" id="success-message"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Delicious Bites Restaurant. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('reservation-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            let isValid = true;
+            const now = new Date();
+            const name = document.querySelector('input[name="name"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const dateTime = new Date(document.querySelector('input[name="date_time"]').value);
+            const personCount = document.querySelector('input[name="person_count"]').value;
+            const specialRequests = document.querySelector('textarea[name="special_requests"]').value;
+
+            // Clear previous errors
+            document.getElementById('name-error').textContent = '';
+            document.getElementById('email-error').textContent = '';
+            document.getElementById('datetime-error').textContent = '';
+            document.getElementById('person-count-error').textContent = '';
+            document.getElementById('form-error').textContent = '';
+            document.getElementById('success-message').textContent = '';
+
+            if (!name) {
+                document.getElementById('name-error').textContent = 'Name is required.';
+                isValid = false;
+            }
+            if (!email) {
+                document.getElementById('email-error').textContent = 'Email is required.';
+                isValid = false;
+            }
+            if (!dateTime || dateTime < now) {
+                document.getElementById('datetime-error').textContent = 'Date and time must be in the future.';
+                isValid = false;
+            }
+            if (!personCount) {
+                document.getElementById('person-count-error').textContent = 'Number of persons is required.';
+                isValid = false;
+            }
+
+            if (isValid) {
+                fetch('/reserve', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        date_time: dateTime.toISOString(),
+                        person_count: personCount,
+                        special_requests: specialRequests
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('success-message').textContent = 'Your table has been booked!';
+                        document.getElementById('reservation-form').reset();
+                    } else {
+                        document.getElementById('form-error').textContent = 'There was an error processing your request.';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('form-error').textContent = 'There was an error processing your request.';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

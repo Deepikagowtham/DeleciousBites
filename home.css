@@ -1,0 +1,125 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; 
+    color: #333; 
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+header nav ul {
+    list-style: none;
+}
+
+header nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+header h1{
+    font-family: "Sofia", sans-serif;
+    font-size: 45px;
+}
+
+
+.hero {
+    background-image: url('https://i.pinimg.com/564x/65/7d/0c/657d0c01845275877f84b22903a8a35b.jpg');
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+    padding: 100px 0;
+}
+
+.dish img {
+    display: block;
+    margin: 0 auto 20px; 
+    width: 200px; 
+    height: auto; 
+} 
+.dish-container{
+    display: flex;
+    align-items: center;
+    margin-left: 100px;
+}
+.hero h2 {
+    font-size: 3em;
+}
+
+
+.menu {
+    padding: 50px 0;
+}
+
+.menu h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.menu .dish {
+    text-align: center;
+}
+
+.menu .dish img {
+    display: block;
+    margin: 0 auto 20px;
+}
+
+
+.reservation {
+    background-color: #f4f4f4;
+    padding: 50px 0;
+}
+
+.reservation h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.reservation form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.reservation input,
+.reservation textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.reservation button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
