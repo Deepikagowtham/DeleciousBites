@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Delicious Bites Restaurant</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+    <link rel="stylesheet" href="login.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0d7d7;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #444;
+            padding: 20px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background: #222;
+            color: #fff;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #555;
+            border: none;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #666;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signup-link a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form id="login-form" action="/login" method="post">
+			<input type="email" name="email" placeholder="Email" required>
+			<input type="password" name="password" placeholder="Password" required>
+			<button type="submit">Login</button>
+			<!-- Error message container -->
+			<div class="error-message" id="error-message"></div>
+		</form>
+        <div class="signup-link">
+            <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = document.querySelector('input[name="email"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/home'; // Redirect on successful login
+                } else {
+                    document.getElementById('error-message').textContent = data.message;
+                }
+            })
+            .catch(error => {
+                document.getElementById('error-message').textContent = 'An error occurred. Please try again.';
+            });
+        });		
+    </script>
+</body>
+</html>
