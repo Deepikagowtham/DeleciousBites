@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious Bites Restaurant - Reservations</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="rev.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-image: url('https://i.pinimg.com/564x/6f/79/8d/6f798d99ef4b1e488532d63969d7a51f.jpg');
+            background-repeat: no-repeat;
+            color: #333; 
+            background-size: cover;
+        }
+        
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        
+        .reservation {
+            padding: 50px 0;
+            text-align: center;
+        }
+        
+        .reservation form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .reservation h2 {
+            margin-bottom: 20px;
+        }
+        
+        .reservation input[type="text"],
+        .reservation input[type="email"],
+        .reservation input[type="datetime-local"],
+        .reservation input[type="number"],
+        .reservation textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        .reservation textarea {
+            height: 100px;
+        }
+        
+        .reservation button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .reservation button:hover {
+            background-color: #555;
+        }
+        
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+        }
+        
+        header nav ul {
+            list-style: none;
+        }
+        
+        header nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        header h1 {
+            font-family: "Sofia", sans-serif;
+            font-size: 45px;
+        }
+        .container h2 {
+            font-family: "Sofia", sans-serif;
+            font-size: 45px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            top: 100px;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+        .icons {
+            position: absolute;
+            right: 30px;
+            top: 10%;
+            transform: translateY(-50%);
+            color: #fff;
+            text-decoration: none;
+        }
+        .icon {
+            position: absolute;
+            right: 20px;
+            top: 15%;
+            transform: translateY(-50%);
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="font-effect-outline">Delicious Bites Restaurant</h1>
+            <nav>
+                <ul>
+                    <li><a href="http://localhost:8080/home">Home</a></li>
+                    <li><a href="http://localhost:8080/menu">Menu</a></li>
+                    <li><a href="http://localhost:8080/rev">Reservations</a></li>
+                    <li><a href="http://localhost:8080/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <a href="http://localhost:8080/login" class="icons"><i class="fa-solid fa-user"></i> Login</a>
+        <a href="http://localhost:8080/signup" class="icon"><i class="fa-solid fa-right-to-bracket"></i> Signup</a>
+    </header>
+
+    <section class="reservation">
+        <div class="container">
+            <h2 class="font-effect-outline">Book your table</h2>
+            <form id="reservation-form" action="/reserve" method="post">
+                <input type="text" name="name" placeholder="Name">
+                <div class="error" id="name-error"></div>
+                <input type="email" name="email" placeholder="Email">
+                <div class="error" id="email-error"></div>
+                <input type="datetime-local" name="date_time" placeholder="Date and Time">
+                <div class="error" id="datetime-error"></div>
+                <input type="number" name="person_count" placeholder="Number of Persons">
+                <div class="error" id="person-count-error"></div>
+                <textarea name="special_requests" placeholder="Special Requests"></textarea>
+                <button type="submit" class="btn">Make Reservation</button>
+            </form>
+            <div class="error" id="form-error"></div>
+            <div class="success" id="success-message"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Delicious Bites Restaurant. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('reservation-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            let isValid = true;
+            const now = new Date();
+            const name = document.querySelector('input[name="name"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const dateTime = new Date(document.querySelector('input[name="date_time"]').value);
+            const personCount = document.querySelector('input[name="person_count"]').value;
+            const specialRequests = document.querySelector('textarea[name="special_requests"]').value;
+
+            // Clear previous errors
+            document.getElementById('name-error').textContent = '';
+            document.getElementById('email-error').textContent = '';
+            document.getElementById('datetime-error').textContent = '';
+            document.getElementById('person-count-error').textContent = '';
+            document.getElementById('form-error').textContent = '';
+            document.getElementById('success-message').textContent = '';
+
+            if (!name) {
+                document.getElementById('name-error').textContent = 'Name is required.';
+                isValid = false;
+            }
+            if (!email) {
+                document.getElementById('email-error').textContent = 'Email is required.';
+                isValid = false;
+            }
+            if (!dateTime || dateTime < now) {
+                document.getElementById('datetime-error').textContent = 'Date and time must be in the future.';
+                isValid = false;
+            }
+            if (!personCount) {
+                document.getElementById('person-count-error').textContent = 'Number of persons is required.';
+                isValid = false;
+            }
+
+            if (isValid) {
+                fetch('/reserve', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        date_time: dateTime.toISOString(),
+                        person_count: personCount,
+                        special_requests: specialRequests
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('success-message').textContent = 'Your table has been booked!';
+                        document.getElementById('reservation-form').reset();
+                    } else {
+                        document.getElementById('form-error').textContent = 'There was an error booking your table. Please try again.';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('form-error').textContent = 'There was an error booking your table. Please try again.';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
