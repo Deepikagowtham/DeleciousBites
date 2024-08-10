@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            background-image: url('https://i.pinimg.com/564x/f5/74/fe/f574fe540779ef545963ecfdd7309b15.jpg');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        .cart-container {
+            margin: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .cart-item img {
+            max-width: 100px;
+            margin-right: 20px;
+        }
+        .cart-item-info {
+            flex: 1;
+        }
+        .total {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cart-container">
+        <h1>Your Cart</h1>
+        <div id="cart-items"></div>
+        <div class="total" id="total-amount">Total: $0</div>
+    </div>
+
+    <script>
+        // Function to display cart items and calculate total amount
+        function displayCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItemsDiv = document.getElementById('cart-items');
+            let totalAmount = 0;
+
+            // Clear previous items
+            cartItemsDiv.innerHTML = '';
+
+            // Display each item
+            cart.forEach(item => {
+                let cartItemDiv = document.createElement('div');
+                cartItemDiv.className = 'cart-item';
+                
+                cartItemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-info">
+                        <h3>${item.name}</h3>
+                        <p>Price: $${item.price}</p>
+                    </div>
+                `;
+                
+                cartItemsDiv.appendChild(cartItemDiv);
+
+                // Add to total amount
+                totalAmount += parseFloat(item.price);
+            });
+
+            // Display total amount
+            document.getElementById('total-amount').innerText = `Total: $${totalAmount.toFixed(2)}`;
+        }
+
+        // Call displayCart function when the page loads
+        window.onload = displayCart;
+    </script>
+</body>
+</html>
